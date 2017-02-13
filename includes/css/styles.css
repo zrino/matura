@@ -1,0 +1,50 @@
+.body
+{
+	color:white;
+}
+
+.navbar
+{
+	//background-color:#00003f;
+	color:white;
+}
+
+.navbar a
+{
+	color:white;
+}
+
+.sidebar
+{
+	//background-color:#90EE90;
+
+}
+
+.mojInput
+{
+	z-index: 9999;
+}
+
+.mainArea
+{
+
+	
+	height:600px;
+}
+.add-btn
+{
+
+	float:right;
+	clear:both;
+}
+
+.submit-btn
+{
+	clear:both;
+	margin-top:50px;
+	text-align:center;
+}
+.odg-template
+{
+	display:none;
+}
