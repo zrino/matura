@@ -1,0 +1,43 @@
+Options -Indexes
+Options +FollowSymLinks
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^matura\.hr
+RewriteRule ^(.*)$ http://www.matura.hr/$1 [R=permanent,L]
+
+
+RewriteRule ^t([0-9a-zA-Z]+)/(.*)? /matura/hr/tinyurl/$1/$2  [R=301,L]
+RewriteRule ^t([0-9a-zA-Z]+)? /matura/hr/tinyurl/$1  [R=301,L]
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /matura/index.php/$1 [L]
+
+
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+RewriteRule ^(.*)$ /matura/index.php [F,L]
+
+<ifModule mod_headers.c>
+	ExpiresActive On
+	# Expires after 1 day, 1 month = 2592000
+	<filesMatch ".(gif|png|jpg|jpeg|ico|pdf|js|htm|html|txt)$">
+	Header set Cache-Control "max-age=2592000"
+	</filesMatch>
+	 
+	# Expires after 1 day
+	<filesMatch ".(css)$">
+	Header set Cache-Control "max-age=86400"
+	</filesMatch>
+</ifModule>
+
+
+<IfModule mod_deflate.c>
+    <filesMatch "\.(js|css)$">
+        SetOutputFilter DEFLATE
+    </filesMatch>
+</IfModule>

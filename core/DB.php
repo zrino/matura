@@ -22,15 +22,32 @@ class DB
 
     public function fetchAll($sql)
     {
-    	$res = array();
+    	$result = array();
     	if($sql != "")
     	{
-    		$result = $this->connection->query($sql);
-        	return $result->fetch_assoc();
+    		$resultsCollection = $this->connection->query($sql);
+        	$count = $resultsCollection->num_rows;
+        	for($i = 0 ;$i < $count; $i++)
+                $result[] = $resultsCollection->fetch_assoc();
+
         }
        
     	return $result;
     }
+
+    public function fetch($sql)
+    {
+        $result = array();
+        if($sql != "")
+        {
+            $temp = $this->connection->query($sql ." LIMIT 1");
+            $result = $temp->fetch_assoc();
+
+        }
+        return $result;
+    }
+
+
 }
 
 
